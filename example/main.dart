@@ -19,15 +19,30 @@ class MyApp extends StatelessWidget {
 class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SuperRichText.globalMarkerTexts.add(MarkerText(
+        marker: '|',
+        style: TextStyle(
+          color: Colors.deepPurple
+        )
+      )
+    );
+
     return Scaffold(
       body: Center(
         child: SuperRichText(
           text: 'Text in *bold* and /italic/ with color llOrangell and color rrRedrr',
+          useGlobalMarkers: false, // set false
           style: TextStyle(
             color: Colors.black87,
             fontSize: 22
           ),
           othersMarkers: [
+            MarkerText(
+                marker: '*',
+                style: TextStyle(
+                    color: Colors.orangeAccent
+                )
+            ),
             MarkerText(
               marker: 'll',
               style: TextStyle(
