@@ -1,6 +1,6 @@
 name: super_rich_text
 description: The easiest way to style custom text snippets by creating your own bookmarks.
-version: 0.1.0+1
+version: 0.1.1
 author: Woton Sampaio <Wotoncf@gmail.com>
 homepage: https://github.com/Bestfastfire/super_rich_text
 
@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  url_launcher: any
 
 dev_dependencies:
   flutter_test:
