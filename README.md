@@ -5,11 +5,15 @@ The easiest way to style custom text snippets
 
 ![ezgif com-video-to-gif-3](https://user-images.githubusercontent.com/22732544/69406013-d50f2000-0cdf-11ea-9573-788064e9ce3d.gif)
 
+## Defaults
+
 In standard markers the "*" is set to bold and "/" to italics as in the example:
 
     SuperRichText(
       text: 'Text in *bold* and /italic/'
     )
+ 
+## Others Markers
     
 But you can change and set your own by passing a list of other labels:
 
@@ -34,6 +38,8 @@ But you can change and set your own by passing a list of other labels:
         ),
       ],
     )
+
+## Override Global Markers
     
 Or even override "*" and "/" by setting global styles not to be used:
 
@@ -53,7 +59,9 @@ Or even override "*" and "/" by setting global styles not to be used:
         )...
       ],
     )
-    
+
+## Global Markers
+      
 The markers in the "othersMarkers" parameter are only for the widget in question, but you can also distinguish global markers:
 
     SuperRichText.globalMarkerTexts.add(MarkerText(
@@ -63,3 +71,37 @@ The markers in the "othersMarkers" parameter are only for the widget in question
         )
       )
     );
+
+## Links   
+    
+It is also possible to insert functions or links directly into the text:
+
+    MarkerText.withUrl(
+      marker: 'll',
+      urls: [
+        'https://www.google.com',
+        'https://www.facebook.com'
+      ],
+      style: TextStyle(
+        fontSize: 36,
+        color: Colors.orangeAccent
+      )
+    )
+    
+In this case, the link list should be in exactly the same sequence as the links within the text, having as base text: "this text has llLink1ll and llLink2ll", the example above would set *Link1* as 'https://www.google.com' and *Link2* as 'https://www.facebook.com'.
+Another point is that it already has a bold style and blue text by default.
+
+## Functions
+
+With functions, the sequence is also the same, but the call should look like this:
+
+    MarkerText.withFunction(
+      marker: 'ff',
+      functions: [
+        () => print('function 1'),
+        () => print('function 2')
+      ],
+      style: TextStyle(
+        color: Colors.greenAccent
+      )
+    )

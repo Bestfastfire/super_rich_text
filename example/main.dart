@@ -30,27 +30,44 @@ class Main extends StatelessWidget {
 
     return Scaffold(
       body: Center(
-        child: SuperRichText(
-          text: 'Text in *bold* and /italic/ with color llOrangell and color rrRedrr',
-          style: TextStyle(
-            color: Colors.black87,
-            fontSize: 22
-          ),
-          othersMarkers: [
-            MarkerText(
-              marker: 'll',
-              style: TextStyle(
-                color: Colors.orangeAccent
-              )
+          child: SuperRichText(
+            text: 'Text in *bold* and /italic/ with color ooOrangeoo and color rrRedrr, llLink1ll llLink2ll, ffFunction1ff ffFunction2ff',
+            style: TextStyle(
+                color: Colors.black87,
+                fontSize: 22
             ),
-            MarkerText(
-              marker: 'rr',
-              style: TextStyle(
-                  color: Colors.redAccent
+            othersMarkers: [
+              MarkerText(
+                  marker: 'oo',
+                  style: TextStyle(
+                      color: Colors.orangeAccent
+                  )
+              ),
+              MarkerText(
+                  marker: 'rr',
+                  style: TextStyle(
+                      color: Colors.redAccent
+                  )
+              ),
+              MarkerText.withUrl(
+                  marker: 'll',
+                  urls: [
+                    'https://www.google.com',
+                    'https://www.facebook.com'
+                  ]
+              ),
+              MarkerText.withFunction(
+                  marker: 'ff',
+                  functions: [
+                        () => print('function 1'),
+                        () => print(('function 2'))
+                  ],
+                  style: TextStyle(
+                      color: Colors.greenAccent
+                  )
               )
-            ),
-          ],
-        ),
+            ],
+          )
       ),
     );
   }
