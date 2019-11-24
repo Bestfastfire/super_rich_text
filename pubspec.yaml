@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  url_launcher: any
+  url_launcher: ^5.2.5
 
 dev_dependencies:
   flutter_test:
