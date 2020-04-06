@@ -114,6 +114,7 @@ class SuperRichText extends StatelessWidget {
                       // ignore: unnecessary_statements
                       marker.onError != null
                           ? marker.onError(index, msg)
+                          // ignore: unnecessary_statements
                           : null;
                     }
                     break;
@@ -129,6 +130,7 @@ class SuperRichText extends StatelessWidget {
                       // ignore: unnecessary_statements
                       marker.onError != null
                           ? marker.onError(index, msg)
+                          // ignore: unnecessary_statements
                           : null;
                     }
                     break;
