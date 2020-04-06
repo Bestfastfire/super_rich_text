@@ -1,7 +1,6 @@
 name: super_rich_text
 description: The easiest way to style custom text snippets by creating your own bookmarks with links and functions.
 version: 0.2.0+2
-author: Woton Sampaio <Wotoncf@gmail.com>
 homepage: https://github.com/Bestfastfire/super_rich_text
 
 environment:
