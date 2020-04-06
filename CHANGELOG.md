@@ -7,3 +7,7 @@
 ## [0.2.0] - Add links and functions
 
 * Now is possible add links and functions in same text.
+
+## [0.2.0+1] - Fix issue
+
+* Errors when text is without markers

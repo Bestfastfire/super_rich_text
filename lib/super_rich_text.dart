@@ -166,12 +166,16 @@ class SuperRichText extends StatelessWidget {
       final String pattern2 = "$m.*?$m";
       final List<RegExpMatch> found = RegExp(pattern).allMatches(text).toList();
 
-      insertValues(
-          found: found.length > 0
-              ? found
-              : RegExp(pattern2).allMatches(text).toList(),
-          pattern: found.length > 0 ? pattern : pattern2,
-          marker: v);
+      try{
+        insertValues(
+            found: found.length > 0
+                ? found
+                : RegExp(pattern2).allMatches(text).toList(),
+            pattern: found.length > 0 ? pattern : pattern2,
+            marker: v);
+      }catch(msg){
+        //ignored
+      }
     });
 
     try {
