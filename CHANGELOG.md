@@ -13,3 +13,5 @@
 * Errors when text is without markers
 
 ## [0.2.0+2] - Fixing Warning
+
+## [0.2.0+3] - Fixing issue

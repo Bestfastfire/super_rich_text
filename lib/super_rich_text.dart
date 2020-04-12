@@ -168,16 +168,20 @@ class SuperRichText extends StatelessWidget {
       final String pattern2 = "$m.*?$m";
       final List<RegExpMatch> found = RegExp(pattern).allMatches(text).toList();
 
-      try{
-        insertValues(
-            found: found.length > 0
-                ? found
-                : RegExp(pattern2).allMatches(text).toList(),
-            pattern: found.length > 0 ? pattern : pattern2,
-            marker: v);
-      }catch(msg){
-        //ignored
-      }
+      insertValues(
+          found: () {
+            if (found.length > 0) {
+              return found;
+            }
+
+            try {
+              return RegExp(pattern2).allMatches(this.text).toList();
+            } catch (msg) {
+              return <RegExpMatch>[];
+            }
+          }(),
+          pattern: found.length > 0 ? pattern : pattern2,
+          marker: v);
     });
 
     try {
@@ -211,6 +215,7 @@ class SuperRichText extends StatelessWidget {
       }
     });
 
+    toSplit = '';
     return RichText(
         key: key,
         locale: locale,
