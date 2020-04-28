@@ -106,6 +106,18 @@ With functions, the sequence is also the same, but the call should look like thi
       )
     )
 
+### Same Functions
+
+When your text has multiple words that perform the same function and has the same style, you can use this:
+
+    MarkerText.withSameFunction(
+      marker: 'sf',
+      function: print('same function'),
+      style: TextStyle(
+        color: Colors.greenAccent
+      )
+    )
+
 ## Help Maintenance
 
 I've been maintaining quite many repos these days and burning out slowly. If you could help me cheer up, buying me a cup of coffee will make my life really happy and get much energy out of it.

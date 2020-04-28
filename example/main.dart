@@ -20,55 +20,36 @@ class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //To add global markers
-    SuperRichText.globalMarkerTexts.add(MarkerText(
-        marker: '|',
-        style: TextStyle(
-          color: Colors.deepPurple
-        )
-      )
-    );
+    SuperRichText.globalMarkerTexts.add(
+        MarkerText(marker: '|', style: TextStyle(color: Colors.deepPurple)));
 
     return Scaffold(
       body: Center(
           child: SuperRichText(
-            text: 'Text in *bold* and /italic/ with color ooOrangeoo and color rrRedrr, llLink1ll llLink2ll, ffFunction1ff ffFunction2ff',
-            style: TextStyle(
-                color: Colors.black87,
-                fontSize: 22
-            ),
-            othersMarkers: [
-              MarkerText(
-                  marker: 'oo',
-                  style: TextStyle(
-                      color: Colors.orangeAccent
-                  )
-              ),
-              MarkerText(
-                  marker: 'rr',
-                  style: TextStyle(
-                      color: Colors.redAccent
-                  )
-              ),
-              MarkerText.withUrl(
-                  marker: 'll',
-                  urls: [
-                    'https://www.google.com',
-                    'https://www.facebook.com'
-                  ]
-              ),
-              MarkerText.withFunction(
-                  marker: 'ff',
-                  functions: [
-                        () => print('function 1'),
-                        () => print(('function 2'))
-                  ],
-                  style: TextStyle(
-                      color: Colors.greenAccent
-                  )
-              )
-            ],
-          )
-      ),
+        text:
+            'Text in *bold* and /italic/ with color ooOrangeoo and color rrRedrr, '
+            'llLink1ll llLink2ll, <f>Function1<f> - <f>Function2<f> <sf>Same Fun<sf> '
+            'and repeat <sf>Same Fun<sf>',
+        style: TextStyle(color: Colors.black87, fontSize: 22),
+        othersMarkers: [
+          MarkerText(
+              marker: 'oo', style: TextStyle(color: Colors.orangeAccent)),
+          MarkerText(marker: 'rr', style: TextStyle(color: Colors.redAccent)),
+          MarkerText.withUrl(
+              marker: 'll',
+              urls: ['https://www.google.com', 'https://www.facebook.com']),
+          MarkerText.withFunction(
+              marker: '<f>',
+              functions: [() => print('function 1'), () => print('function 2')],
+              onError: (i, msg) => print('$i -> $msg'),
+              style: TextStyle(color: Colors.greenAccent)),
+          MarkerText.withSameFunction(
+              marker: '<sf>',
+              function: () => print('function'),
+              onError: (msg) => print('$msg'),
+              style: TextStyle(color: Colors.purple))
+        ],
+      )),
     );
   }
 }

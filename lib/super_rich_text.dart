@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-enum MarkerType { function, text, url }
+enum MarkerType { function, sameFunction, text, url }
 
 class MarkerText {
   final String marker;
@@ -52,6 +52,19 @@ class MarkerText {
         marker: marker,
         style: style);
   }
+
+  factory MarkerText.withSameFunction(
+      {@required String marker,
+      @required Function function,
+      @required TextStyle style,
+      Function(String msg) onError}) {
+    return MarkerText._internal(
+        type: MarkerType.sameFunction,
+        functions: [function],
+        onError: (i, msg) => onError(msg),
+        marker: marker,
+        style: style);
+  }
 }
 
 // ignore: must_be_immutable
@@ -73,7 +86,11 @@ class SuperRichText extends StatelessWidget {
   final TextWidthBasis textWidthBasis;
   final List<MarkerText> othersMarkers;
   final bool useGlobalMarkers;
-  final List<MarkerType> _typeWithTap = [MarkerType.url, MarkerType.function];
+  final List<MarkerType> _typeWithTap = [
+    MarkerType.url,
+    MarkerType.function,
+    MarkerType.sameFunction
+  ];
   Map<String, TextSpan> texts = {};
   String toSplit = '';
 
@@ -114,6 +131,18 @@ class SuperRichText extends StatelessWidget {
                       // ignore: unnecessary_statements
                       marker.onError != null
                           ? marker.onError(index, msg)
+                          // ignore: unnecessary_statements
+                          : null;
+                    }
+                    break;
+
+                  case MarkerType.sameFunction:
+                    try {
+                      await marker.functions[0]();
+                    } catch (msg) {
+                      // ignore: unnecessary_statements
+                      marker.onError != null
+                          ? marker.onError(0, msg)
                           // ignore: unnecessary_statements
                           : null;
                     }

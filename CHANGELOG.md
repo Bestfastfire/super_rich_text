@@ -15,3 +15,7 @@
 ## [0.2.0+2] - Fixing Warning
 
 ## [0.2.0+3] - Fixing issue
+
+## [0.2.1] - Added Marker
+
+* Marker added for the same functions for any words with the same style
