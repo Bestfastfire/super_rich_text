@@ -96,7 +96,7 @@ Another point is that it already has a bold style and blue text by default.
 With functions, the sequence is also the same, but the call should look like this:
 
     MarkerText.withFunction(
-      marker: 'ff',
+      marker: '<ff>',
       functions: [
         () => print('function 1'),
         () => print('function 2')
@@ -111,7 +111,7 @@ With functions, the sequence is also the same, but the call should look like thi
 When your text has multiple words that perform the same function and has the same style, you can use this:
 
     MarkerText.withSameFunction(
-      marker: 'sf',
+      marker: '<sf>',
       function: print('same function'),
       style: TextStyle(
         color: Colors.greenAccent
