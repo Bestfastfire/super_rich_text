@@ -5,6 +5,12 @@ The easiest way to style custom text snippets
 
 ![ezgif com-video-to-gif-3](https://user-images.githubusercontent.com/22732544/69406013-d50f2000-0cdf-11ea-9573-788064e9ce3d.gif)
 
+## Help Maintenance
+
+I've been maintaining quite many repos these days and burning out slowly. If you could help me cheer up, buying me a cup of coffee will make my life really happy and get much energy out of it.
+
+<a href="https://www.buymeacoffee.com/RtrHv1C" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
 ## Defaults
 
 In standard markers the "*" is set to bold and "/" to italics as in the example:
@@ -117,9 +123,3 @@ When your text has multiple words that perform the same function and has the sam
         color: Colors.greenAccent
       )
     )
-
-## Help Maintenance
-
-I've been maintaining quite many repos these days and burning out slowly. If you could help me cheer up, buying me a cup of coffee will make my life really happy and get much energy out of it.
-
-<a href="https://www.buymeacoffee.com/RtrHv1C" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
