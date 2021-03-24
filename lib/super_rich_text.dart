@@ -295,8 +295,8 @@ class SuperRichText extends StatelessWidget {
         ? RegExp(toSplit)
             .allMatches(text)
             .toList()
-            .map((v) => v.group(0))
-            .toList() as List<String>
+            .map((v) => v.group(0)!)
+            .toList() 
         : [];
 
     int i = 0;
