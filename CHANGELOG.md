@@ -1,3 +1,5 @@
+## [0.3.0] - Null-safety
+
 ## [0.2.1+1] - Fix bugs and texts
 
 ## [0.2.1] - Added Marker

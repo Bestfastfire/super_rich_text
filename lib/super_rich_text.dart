@@ -41,11 +41,11 @@ class MarkerText {
   factory MarkerText.withUrl(
       {required String marker,
       required List<String> urls,
-      TextStyle style= const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+      TextStyle style =
+          const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
       OnErrorType? onError}) {
     return MarkerText._internal(
-      style:
-          style,
+      style: style,
       type: MarkerType.url,
       onError: onError,
       marker: marker,
@@ -80,7 +80,7 @@ class MarkerText {
   }
 }
 
-// ignore: must_be_immutable
+@immutable
 class SuperRichText extends StatelessWidget {
   /// List of global markers
   static final List<MarkerText> globalMarkerTexts = [
@@ -159,8 +159,7 @@ class SuperRichText extends StatelessWidget {
     MarkerType.function,
     MarkerType.sameFunction
   ];
-  Map<String, TextSpan> texts = {};
-  String toSplit = '';
+  final Map<String, TextSpan> texts = {};
 
   SuperRichText(
       {required this.text,
@@ -177,11 +176,7 @@ class SuperRichText extends StatelessWidget {
       this.textWidthBasis = TextWidthBasis.parent,
       this.useGlobalMarkers = true,
       this.othersMarkers = const []})
-      : assert(
-          text != null,
-          'A non-null String must be provided to a Text widget.',
-        ),
-        super(key: key);
+      : super(key: key);
 
   TextSpan getTextSpan(
       {required RegExpMatch regex, required MarkerText marker, int? index}) {
@@ -191,16 +186,16 @@ class SuperRichText extends StatelessWidget {
         recognizer: _typeWithTap.contains(marker.type)
             ? (TapGestureRecognizer()
               ..onTap = () async {
+                final onError = marker.onError;
+
                 switch (marker.type) {
                   case MarkerType.function:
                     try {
                       await marker.functions![index!]();
                     } catch (msg) {
-                      // ignore: unnecessary_statements
-                      marker.onError != null
-                          ? marker.onError!(index!, msg)
-                          // ignore: unnecessary_statements
-                          : null;
+                      if (onError != null) {
+                        onError(index ?? 0, msg);
+                      }
                     }
                     break;
 
@@ -208,11 +203,9 @@ class SuperRichText extends StatelessWidget {
                     try {
                       await marker.functions![0]();
                     } catch (msg) {
-                      // ignore: unnecessary_statements
-                      marker.onError != null
-                          ? marker.onError!(0, msg)
-                          // ignore: unnecessary_statements
-                          : null;
+                      if (onError != null) {
+                        onError(0, msg);
+                      }
                     }
                     break;
 
@@ -224,11 +217,9 @@ class SuperRichText extends StatelessWidget {
                         throw 'cant launch';
                       }
                     } catch (msg) {
-                      // ignore: unnecessary_statements
-                      marker.onError != null
-                          ? marker.onError!(index!, msg)
-                          // ignore: unnecessary_statements
-                          : null;
+                      if (onError != null) {
+                        onError(index ?? 0, msg);
+                      }
                     }
                     break;
 
@@ -239,21 +230,22 @@ class SuperRichText extends StatelessWidget {
             : null);
   }
 
-  insertValues(
-      {required List<RegExpMatch> found, String? pattern, MarkerText? marker}) {
-    if (found.length > 0) {
-      int index = 0;
-      toSplit += '$pattern|';
-
-      found.forEach((f) => texts[f.group(0)!] =
-          getTextSpan(regex: f, index: index++, marker: marker!));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final List<MarkerText> allMarkers = [];
+    String toSplit = '';
     allMarkers.addAll(othersMarkers);
+
+    void insertValues(
+        {required List<RegExpMatch> found, String? pattern, MarkerText? marker}) {
+      if (found.length > 0) {
+        int index = 0;
+        toSplit += '$pattern|';
+
+        found.forEach((f) => texts[f.group(0)!] =
+            getTextSpan(regex: f, index: index++, marker: marker!));
+      }
+    }
 
     if (useGlobalMarkers) {
       allMarkers.addAll(globalMarkerTexts);
@@ -284,8 +276,7 @@ class SuperRichText extends StatelessWidget {
     try {
       toSplit = toSplit.substring(0, toSplit.length - 1);
     } catch (msg) {
-      //ignored
-
+      // TODO
     }
 
     final List<String> normalTexts =
@@ -296,7 +287,7 @@ class SuperRichText extends StatelessWidget {
             .allMatches(text)
             .toList()
             .map((v) => v.group(0)!)
-            .toList() 
+            .toList()
         : [];
 
     int i = 0;
@@ -307,8 +298,7 @@ class SuperRichText extends StatelessWidget {
       try {
         finalList.add(texts[inSequence[i++]]!);
       } catch (msg) {
-        //ignored
-
+        // TODO
       }
     });
 
