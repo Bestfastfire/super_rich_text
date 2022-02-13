@@ -237,7 +237,9 @@ class SuperRichText extends StatelessWidget {
     allMarkers.addAll(othersMarkers);
 
     void insertValues(
-        {required List<RegExpMatch> found, String? pattern, MarkerText? marker}) {
+        {required List<RegExpMatch> found,
+        String? pattern,
+        MarkerText? marker}) {
       if (found.length > 0) {
         int index = 0;
         toSplit += '$pattern|';

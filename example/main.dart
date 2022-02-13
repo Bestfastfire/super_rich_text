@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:super_rich_text/super_rich_text.dart';
+import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
