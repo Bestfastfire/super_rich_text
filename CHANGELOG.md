@@ -1,3 +1,7 @@
+## [1.1.0] - Added SelectableText and dependencies updated.
+
+* Now is possible to make selectable text.
+
 ## [1.0.0] - Null-safety
 
 ## [0.2.1+1] - Fix bugs and texts
