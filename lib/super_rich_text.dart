@@ -154,6 +154,12 @@ class SuperRichText extends StatelessWidget {
   /// Pass false case don't to want use global markers
   final bool useGlobalMarkers;
 
+  /// Pass "true" if you want selectable text
+  final bool isSelectable;
+
+  /// Toolbar configuration for SuperRichText
+  final ToolbarOptions? toolbarOptions;
+
   final List<MarkerType> _typeWithTap = [
     MarkerType.url,
     MarkerType.function,
@@ -161,22 +167,24 @@ class SuperRichText extends StatelessWidget {
   ];
   final Map<String, TextSpan> texts = {};
 
-  SuperRichText(
-      {required this.text,
-      Key? key,
-      this.style,
-      this.strutStyle,
-      this.textAlign = TextAlign.start,
-      this.textDirection,
-      this.locale,
-      this.softWrap = true,
-      this.overflow = TextOverflow.clip,
-      this.textScaleFactor = 1.0,
-      this.maxLines,
-      this.textWidthBasis = TextWidthBasis.parent,
-      this.useGlobalMarkers = true,
-      this.othersMarkers = const []})
-      : super(key: key);
+  SuperRichText({
+    required this.text,
+    Key? key,
+    this.style,
+    this.strutStyle,
+    this.textAlign = TextAlign.start,
+    this.textDirection,
+    this.locale,
+    this.softWrap = true,
+    this.overflow = TextOverflow.clip,
+    this.textScaleFactor = 1.0,
+    this.maxLines,
+    this.textWidthBasis = TextWidthBasis.parent,
+    this.useGlobalMarkers = true,
+    this.othersMarkers = const [],
+    this.isSelectable = false,
+    this.toolbarOptions,
+  }) : super(key: key);
 
   TextSpan getTextSpan(
       {required RegExpMatch regex, required MarkerText marker, int? index}) {
@@ -211,8 +219,9 @@ class SuperRichText extends StatelessWidget {
 
                   case MarkerType.url:
                     try {
-                      if (await canLaunch(marker.urls![index!])) {
-                        launch(marker.urls![index]);
+                      var url = Uri.parse(marker.urls![index!]);
+                      if (await canLaunchUrl(url)) {
+                        launchUrl(url);
                       } else {
                         throw 'cant launch';
                       }
@@ -305,19 +314,35 @@ class SuperRichText extends StatelessWidget {
     });
 
     toSplit = '';
-    return RichText(
-        key: key,
-        locale: locale,
-        maxLines: maxLines,
-        overflow: overflow,
-        softWrap: softWrap,
-        textAlign: textAlign,
-        strutStyle: strutStyle,
-        textDirection: textDirection,
-        textWidthBasis: textWidthBasis,
-        textScaleFactor: textScaleFactor,
-        text: TextSpan(
-            children: finalList,
-            style: style ?? DefaultTextStyle.of(context).style));
+    var textSpan = TextSpan(
+      children: finalList,
+      style: style ?? DefaultTextStyle.of(context).style,
+    );
+    var result = isSelectable
+        ? SelectableText.rich(
+            textSpan,
+            key: key,
+            maxLines: maxLines,
+            textAlign: textAlign,
+            strutStyle: strutStyle,
+            textDirection: textDirection,
+            textWidthBasis: textWidthBasis,
+            textScaleFactor: textScaleFactor,
+            toolbarOptions: toolbarOptions,
+          )
+        : RichText(
+            key: key,
+            locale: locale,
+            maxLines: maxLines,
+            overflow: overflow,
+            softWrap: softWrap,
+            textAlign: textAlign,
+            strutStyle: strutStyle,
+            textDirection: textDirection,
+            textWidthBasis: textWidthBasis,
+            textScaleFactor: textScaleFactor,
+            text: textSpan,
+          );
+    return result;
   }
 }
